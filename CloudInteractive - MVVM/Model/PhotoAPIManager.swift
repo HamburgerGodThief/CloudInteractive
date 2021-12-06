@@ -14,9 +14,8 @@ class PhotoAPIManager {
         HTTPClient.shared.sendRequest(request: PhotoAPIRequest.read, completion: { result in
             switch result {
             case .success(let data):
-                
                 do {
-                    let resultData = try JSONDecoder().decode([PhotoModel].self, from: data)
+                    let resultData = try data.decoded(asType: [PhotoModel].self)
                     
                     completion(Result.success(resultData))
                     

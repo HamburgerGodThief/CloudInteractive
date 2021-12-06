@@ -9,7 +9,6 @@ import UIKit
 import Foundation
 
 class PhotoViewModel {
-    
     var photos: [PhotoModel] = []
     
     var imageCache = NSCache<NSURL, UIImage>()
@@ -43,5 +42,4 @@ class PhotoViewModel {
         }).resume()
         
     }
-    
 }
