@@ -12,6 +12,8 @@ class PhotoViewModel {
     
     var photos: [PhotoModel] = []
     
+    var imageCache = NSCache<NSURL, UIImage>()
+    
     func readAPI(completion: @escaping () -> Void ) {
         let photoAPIManager = PhotoAPIManager()
         photoAPIManager.read(completion: { [weak self] result in
@@ -27,11 +29,19 @@ class PhotoViewModel {
     
     func urlToImage(index: Int, completion: @escaping (UIImage) -> Void) {
         
-        URLSession.shared.dataTask(with: photos[index].thumbnailUrl, completionHandler: { (data, response, error) in
+        if let image = imageCache.object(forKey: photos[index].thumbnailUrl as NSURL) {
+            completion(image)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: photos[index].thumbnailUrl, completionHandler: { [weak self] (data, response, error) in
+            guard let strongSelf = self else { return }
             guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
+            strongSelf.imageCache.setObject(image, forKey: strongSelf.photos[index].thumbnailUrl as NSURL)
             completion(image)
         }).resume()
         
     }
+    
 }
