@@ -68,19 +68,29 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="QeN-Du-TWZ">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QeN-Du-TWZ" secondAttribute="height" multiplier="1:1" id="xC6-2k-QUH"/>
+                                </constraints>
+                                <color key="color" systemColor="linkColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xQ2-vK-6pI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xQ2-vK-6pI" firstAttribute="trailing" secondItem="BBG-it-K1r" secondAttribute="trailing" id="5W2-oe-CIQ"/>
                             <constraint firstItem="BBG-it-K1r" firstAttribute="leading" secondItem="xQ2-vK-6pI" secondAttribute="leading" id="Clw-lj-J3a"/>
+                            <constraint firstItem="QeN-Du-TWZ" firstAttribute="centerX" secondItem="bmn-LE-hQU" secondAttribute="centerX" id="RCQ-fW-gvN"/>
                             <constraint firstItem="BBG-it-K1r" firstAttribute="top" secondItem="xQ2-vK-6pI" secondAttribute="top" id="aZm-ZV-iAD"/>
                             <constraint firstItem="xQ2-vK-6pI" firstAttribute="bottom" secondItem="BBG-it-K1r" secondAttribute="bottom" id="sbr-Dv-Wpn"/>
+                            <constraint firstItem="QeN-Du-TWZ" firstAttribute="centerY" secondItem="bmn-LE-hQU" secondAttribute="centerY" id="yAN-rN-WpC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XPh-gs-wZI"/>
                     <connections>
                         <outlet property="collectionView" destination="BBG-it-K1r" id="eLE-e3-zoy"/>
+                        <outlet property="loadingIndicatorView" destination="QeN-Du-TWZ" id="QcN-dP-Wuz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydc-62-3t3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -107,6 +117,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

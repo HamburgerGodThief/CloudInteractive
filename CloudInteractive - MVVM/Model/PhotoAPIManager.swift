@@ -30,7 +30,6 @@ class PhotoAPIManager {
                 } catch {
                     completion(Result.failure(error))
                 }
-                
             case .failure(let error):
                 completion(Result.failure(error))
             }

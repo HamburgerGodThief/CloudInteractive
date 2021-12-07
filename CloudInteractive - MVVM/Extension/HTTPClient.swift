@@ -10,7 +10,7 @@ import Foundation
 enum Result<T> {
     
     case success(T)
-
+    
     case failure(Error)
 }
 
@@ -36,6 +36,7 @@ protocol APIRequest {
 }
 
 extension APIRequest {
+    
     func makeRequest() -> URLRequest {
         let urlString = "https://jsonplaceholder.typicode.com/photos"
         let url = URL(string: urlString)!
@@ -45,6 +46,7 @@ extension APIRequest {
         request.httpMethod = method
         return request
     }
+    
 }
 
 
@@ -71,7 +73,7 @@ class HTTPClient {
             switch statusCode {
 
             case 200..<300:
-
+                
                 completion(Result.success(data!))
 
             case 400..<500:
@@ -89,4 +91,5 @@ class HTTPClient {
         }).resume()
         
     }
+    
 }

@@ -13,6 +13,7 @@ class PhotoViewController: UIViewController {
     
     let itemSpace: CGFloat = 1
     
+    @IBOutlet weak var loadingIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.delegate = self
@@ -23,13 +24,16 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingIndicatorView.startAnimating()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         photoViewModel.readAPI(completion: {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.loadingIndicatorView.stopAnimating()
+                self?.loadingIndicatorView.isHidden = true
+                self?.collectionView.reloadData()
             }
         })
     }

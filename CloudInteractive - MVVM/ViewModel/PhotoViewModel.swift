@@ -9,9 +9,12 @@ import UIKit
 import Foundation
 
 class PhotoViewModel {
+    
     var photos: [PhotoModel] = []
     
     var imageCache = NSCache<NSURL, UIImage>()
+    
+    var imageEtag: [Int: String] = [:]
     
     func readAPI(completion: @escaping () -> Void ) {
         let photoAPIManager = PhotoAPIManager()
@@ -33,13 +36,15 @@ class PhotoViewModel {
             return
         }
         
-        URLSession.shared.dataTask(with: photos[index].thumbnailUrl, completionHandler: { [weak self] (data, response, error) in
+        let imageHandler = ImageHandler()
+        
+        imageHandler.readImage(url: photos[index].thumbnailUrl, etag: imageEtag[index] ?? "", completion: { [weak self] (data, etag) in
             guard let strongSelf = self else { return }
-            guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
             strongSelf.imageCache.setObject(image, forKey: strongSelf.photos[index].thumbnailUrl as NSURL)
+            strongSelf.imageEtag[index] = etag
             completion(image)
-        }).resume()
+        })
         
     }
 }

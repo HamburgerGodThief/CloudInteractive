@@ -12,7 +12,10 @@ enum PhotoAPIRequest: APIRequest {
     case read
     
     var header: [String : String] {
+        switch self {
+        case .read:
         return ["Content-Type": "application/json"]
+        }
     }
     
     var body: Data? { return nil }
