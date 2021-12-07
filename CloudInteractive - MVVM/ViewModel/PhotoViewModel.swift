@@ -12,9 +12,9 @@ class PhotoViewModel {
     
     var photos: [PhotoModel] = []
     
-    var imageCache = NSCache<NSURL, UIImage>()
+    private var imageCache = NSCache<NSURL, UIImage>()
     
-    var imageEtag: [Int: String] = [:]
+    private var imageEtag: [Int: String] = [:]
     
     func readAPI(completion: @escaping () -> Void ) {
         let photoAPIManager = PhotoAPIManager()
